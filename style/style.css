@@ -298,3 +298,83 @@ body {
     font-weight: lighter;
   }
 }
+
+/* Professional Polish */
+body {
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+  overflow: hidden;
+}
+
+/* Enhanced Particle System */
+.flower,
+.heart-particle {
+  position: fixed;
+  z-index: 1000; /* Ensure visibility */
+  pointer-events: none;
+  user-select: none;
+}
+
+.flower {
+  top: -10vh;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+.heart-particle {
+  bottom: -10vh;
+  animation-name: rise, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    top: -10vh;
+    transform: rotate(0deg);
+  }
+  100% {
+    top: 110vh;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rise {
+  0% {
+    bottom: -10vh;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    bottom: 110vh;
+    transform: scale(1);
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(25px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-25px) rotate(-5deg);
+  }
+}
+
+/* Depth of Field Effect */
+.blur-sm {
+  filter: blur(1px);
+  opacity: 0.7;
+}
+.blur-md {
+  filter: blur(2px);
+  opacity: 0.5;
+}

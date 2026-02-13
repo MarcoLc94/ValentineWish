@@ -46,7 +46,7 @@ const animationTimeline = () => {
         opacity: 0,
         y: 10,
       },
-      "+=2.5"
+      "+=2.5",
     )
     .to(
       ".two",
@@ -55,7 +55,7 @@ const animationTimeline = () => {
         opacity: 0,
         y: 10,
       },
-      "-=1"
+      "-=1",
     )
     .from(".three", 0.7, {
       opacity: 0,
@@ -69,7 +69,7 @@ const animationTimeline = () => {
         opacity: 0,
         y: 10,
       },
-      "+=2"
+      "+=2",
     )
     .from(".four", 0.7, {
       scale: 0.2,
@@ -85,7 +85,7 @@ const animationTimeline = () => {
       {
         visibility: "visible",
       },
-      0.05
+      0.05,
     )
     .to(".fake-btn", 0.1, {
       backgroundColor: "rgb(127, 206, 248)",
@@ -98,7 +98,7 @@ const animationTimeline = () => {
         opacity: 0,
         y: -150,
       },
-      "+=0.7"
+      "+=0.7",
     )
     .from(".idea-1", 0.7, ideaTextTrans)
     .to(".idea-1", 0.7, ideaTextTransLeave, "+=1.5")
@@ -125,7 +125,7 @@ const animationTimeline = () => {
         z: 10,
         opacity: 0,
       },
-      "+=0.5"
+      "+=0.5",
     )
     .to(
       ".idea-5 span",
@@ -134,7 +134,7 @@ const animationTimeline = () => {
         rotation: 90,
         x: 8,
       },
-      "+=0.4"
+      "+=0.4",
     )
     .to(
       ".idea-5",
@@ -143,7 +143,7 @@ const animationTimeline = () => {
         scale: 0.2,
         opacity: 0,
       },
-      "+=2"
+      "+=2",
     )
     .staggerFrom(
       ".idea-6 span",
@@ -154,7 +154,7 @@ const animationTimeline = () => {
         rotation: 15,
         ease: Expo.easeOut,
       },
-      0.2
+      0.2,
     )
     .staggerTo(
       ".idea-6 span",
@@ -166,7 +166,7 @@ const animationTimeline = () => {
         ease: Expo.easeOut,
       },
       0.2,
-      "+=1"
+      "+=1",
     )
     .staggerFromTo(
       ".baloons img",
@@ -179,7 +179,7 @@ const animationTimeline = () => {
         opacity: 1,
         y: -1000,
       },
-      0.2
+      0.2,
     )
     .from(
       ".girl-dp",
@@ -191,7 +191,7 @@ const animationTimeline = () => {
         y: -25,
         rotationZ: -45,
       },
-      "-=2"
+      "-=2",
     )
     .from(".hat", 0.5, {
       x: -100,
@@ -210,7 +210,7 @@ const animationTimeline = () => {
         skewX: "30deg",
         ease: Elastic.easeOut.config(1, 0.5),
       },
-      0.1
+      0.1,
     )
     .staggerFromTo(
       ".wish-hbd span",
@@ -226,7 +226,7 @@ const animationTimeline = () => {
         ease: Expo.easeOut,
       },
       0.1,
-      "party"
+      "party",
     )
     .from(
       ".wish h5",
@@ -236,7 +236,7 @@ const animationTimeline = () => {
         y: 10,
         skewX: "-15deg",
       },
-      "party"
+      "party",
     )
     .staggerTo(
       ".eight svg",
@@ -248,7 +248,7 @@ const animationTimeline = () => {
         repeat: 3,
         repeatDelay: 1.4,
       },
-      0.3
+      0.3,
     )
     .to(".six", 0.5, {
       opacity: 0,
@@ -262,7 +262,7 @@ const animationTimeline = () => {
       {
         rotation: 90,
       },
-      "+=1"
+      "+=1",
     );
 
   // tl.seek("currentStep");
@@ -303,3 +303,48 @@ const resolveFetch = () => {
 };
 
 resolveFetch().then(animationTimeline());
+
+// Enhanced Particle System
+const createParticles = () => {
+  const particleCount = 60; // Total particles
+  const container = document.body;
+  const assets = [
+    { type: "flower", src: "img/flower.svg", class: "flower" },
+    { type: "flower", src: "img/flower2.svg", class: "flower" },
+    { type: "flower", src: "img/flower3.svg", class: "flower" },
+    { type: "heart", src: "img/heart.svg", class: "heart-particle" }, // Using existing heart asset
+  ];
+
+  for (let i = 0; i < particleCount; i++) {
+    const asset = assets[Math.floor(Math.random() * assets.length)];
+    const el = document.createElement("img");
+    el.src = asset.src;
+    el.classList.add(asset.class);
+
+    // Depth of field
+    const depth = Math.random();
+    if (depth < 0.2) el.classList.add("blur-md");
+    else if (depth < 0.4) el.classList.add("blur-sm");
+
+    // Adjust z-index based on blur to simulate depth
+    el.style.zIndex = depth < 0.4 ? "0" : "1000";
+
+    // Randomize properties
+    const xPos = Math.random() * 100;
+    const delay = Math.random() * 10;
+    const duration = 5 + Math.random() * 15;
+    const size = 15 + Math.random() * 35;
+    const swayDuration = 3 + Math.random() * 5;
+
+    el.style.left = `${xPos}vw`;
+    el.style.width = `${size}px`;
+
+    // Animation properties
+    el.style.animationDelay = `${delay}s, ${delay}s`;
+    el.style.animationDuration = `${duration}s, ${swayDuration}s`;
+
+    container.appendChild(el);
+  }
+};
+
+createParticles();
